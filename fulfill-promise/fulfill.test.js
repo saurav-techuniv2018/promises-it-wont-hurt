@@ -1,5 +1,6 @@
 const fulfill = require('./fulfill');
 
+
 describe(fulfill.name, () => {
   test('should call console.log function with \'FULFILLED!\'', (done) => {
     console.log = jest.fn();
@@ -10,15 +11,18 @@ describe(fulfill.name, () => {
   });
   test('should call the setTimeout function once', () => {
     jest.useFakeTimers();
-    fulfill.then(() => {
-      expect(setTimeout).toHaveBeenCalledTimes(1);
-    });
+    fulfill
+      .then(() => {
+        expect(setTimeout).toHaveBeenCalledTimes(1);
+      })
+      .catch(() => { });
   });
-  test('should call setTimeout with 300 as duration', () => {
-    jest.useFakeTimers();
-    fulfill.then(() => {
-      expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 300, 'FULFILLED!');
-    });
+  test('should call setTimeout with 300 as duration', async () => {
+    fulfill
+      .then(() => {
+        expect(setTimeout.mock.calls[0][1]).toBe(300);
+      })
+      .catch(() => { });
   });
 });
 
