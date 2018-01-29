@@ -14,5 +14,11 @@ describe(fulfill.name, () => {
       expect(setTimeout).toHaveBeenCalledTimes(1);
     });
   });
+  test('should call setTimeout with 300 as duration', () => {
+    jest.useFakeTimers();
+    fulfill.then(() => {
+      expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 300, 'FULFILLED!');
+    });
+  });
 });
 

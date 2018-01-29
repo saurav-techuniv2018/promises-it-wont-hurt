@@ -15,5 +15,10 @@ describe(greet.name, () => {
     greet();
     expect(setTimeout).toHaveBeenCalledTimes(1);
   });
+  test('should call setTimeout with 300 as duration', () => {
+    jest.useFakeTimers();
+    greet();
+    expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 300, 'TIMED OUT!');
+  });
 });
 
