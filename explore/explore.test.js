@@ -1,6 +1,9 @@
 const explore = require('./explore');
 
 describe('explore.resolve', () => {
+  test('should resolve to a Promise', () => {
+    expect(explore.resolve).toBeInstanceOf(Promise);
+  });
   test('should resolve to \'RESOLVED\'', () => {
     explore.resolve
       .then((value) => {
@@ -11,11 +14,14 @@ describe('explore.resolve', () => {
 });
 
 describe('explore.reject', () => {
+  test('should resolve to a Promise', () => {
+    expect(explore.reject).toBeInstanceOf(Promise);
+  });
   test('should resolve to \'REJECTED\'', () => {
-    explore.resolve
+    explore.reject
       .then(() => { })
       .catch((reason) => {
-        expect(reason).toBe('RESOLVED');
+        expect(reason).toEqual(new Error('REJECTED'));
       });
   });
 });
